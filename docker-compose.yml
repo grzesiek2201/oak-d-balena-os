@@ -1,0 +1,20 @@
+version: "2.2"
+
+volumes:
+  resin-data: {}
+
+services:
+  oak:
+    container_name: oak
+    hostname: oak
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: oak
+    stop_grace_period: 3s
+    restart: unless-stopped
+    privileged: true
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    device_cgroups:
+      - "c 189:* rmw"
