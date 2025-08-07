@@ -24,6 +24,10 @@ RUN pip install --ignore-installed \
     opencv-python \
     --break-system-packages
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
+
 COPY start_script.sh /start_script.sh
 RUN chmod +x /start_script.sh
-CMD ["/start_script.sh"]
+CMD [ "/start_script.sh" ]

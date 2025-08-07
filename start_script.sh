@@ -18,14 +18,15 @@ mkdir -p "$newdev/pts"
 touch "$newdev/console"
 
 # Move existing mounts
-mount --move /dev/shm "$newdev/shm"
-mount --move /dev/pts "$newdev/pts"
-mount --move /dev/mqueue "$newdev/mqueue"
 mount --move /dev/console "$newdev/console"
-unmount --move "$newdev" /dev
+mount --move /dev/mqueue "$newdev/mqueue"
+mount --move /dev/pts "$newdev/pts"
+mount --move /dev/shm "$newdev/shm"
+unmount /dev || true
+mount --move "$newdev" /dev
 
 # Setup ptmx symlink
-ln -sf /dev/pts/ptmx /dev/ptms
+ln -sf /dev/pts/ptmx /dev/ptmx
 
 # Setup debugfs if not already mounted
 sysfs_dir="/sys/kernel/debug"
