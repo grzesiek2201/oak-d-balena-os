@@ -1,0 +1,7 @@
+name: oakd-camera
+type: sw.application
+joinable: false
+data:
+  supportedDeviceTypes:
+    - raspberrypi5
+version: 0.0.1

@@ -22,7 +22,7 @@ mount --move /dev/console "$newdev/console"
 mount --move /dev/mqueue "$newdev/mqueue"
 mount --move /dev/pts "$newdev/pts"
 mount --move /dev/shm "$newdev/shm"
-unmount /dev || true
+umount /dev || true
 mount --move "$newdev" /dev
 
 # Setup ptmx symlink
@@ -38,7 +38,7 @@ fi
 if which udevadm > /dev/null; then
     set +e # Disable exit on error
     unshare --net /lib/systemd/systemd-udevd --daemon
-    service udev restart
+    # service udev restart
     udevadm control --reload-rules
     udevadm trigger
     set -e # Re-enable exit on error
@@ -46,3 +46,5 @@ fi
 
 # Run the command
 exec "$@"
+
+sleep infinity
